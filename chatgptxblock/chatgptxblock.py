@@ -2,22 +2,18 @@ import json
 import requests
 import pkg_resources
 from openai import OpenAI
-
-
 from xblock.core import XBlock
 from xblock.fields import Integer, String, Scope
 from xblock.fragment import Fragment
 from xblockutils.studio_editable import StudioEditableXBlockMixin
-from .common import (get_xblock_settings)
+
 
 class ChatgptXBlock(StudioEditableXBlockMixin, XBlock):
-
-    settings = get_xblock_settings()
     # Define the fields of the XBlock
     display_name = String(
         display_name="Display Name",
         help="Display name for this module",
-        default=settings.get("display_name"),
+        default="ChatGPT Assistant",
         scope=Scope.settings,
     )
 
@@ -33,12 +29,12 @@ class ChatgptXBlock(StudioEditableXBlockMixin, XBlock):
     )
 
     api_key = String(
-        default="",
+        default="sk-vyJzdurDebHNfWknuNR7T3BlbkFJXWWRjsdfsdfdrwfsdf",
         scope=Scope.settings,
         help="Your OpenAI API key, which can be found at <a href='https://platform.openai.com/account/api-keys' target='_blank'>https://platform.openai.com/account/api-keys</a>",
     )
     context_text = String(
-        default=" ",
+        default="Learning is ",
         scope=Scope.settings,
         help="Your context here",
     )
@@ -54,13 +50,13 @@ class ChatgptXBlock(StudioEditableXBlockMixin, XBlock):
 
     # TO-DO: Add any additional fields.
 
-    # editable_fields = [
-    #     'display_name',
-    #     'model_name',
-    #     'api_key',
-    #     'description',
-    #     'context_text',
-    # ]
+    editable_fields = [
+        'display_name',
+        'model_name',
+        'api_key',
+        'description',
+        'context_text',
+    ]
 
     def resource_string(self, path):
         """Handy helper for getting resources from our kit."""
